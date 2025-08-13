@@ -17,6 +17,7 @@ export const useGameTimer = (initialTime = 5) => {
         setIsPaused(true);
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
+            intervalRef.current = null;
         }
     }, []);
 
@@ -30,9 +31,11 @@ export const useGameTimer = (initialTime = 5) => {
         setTimeLeft(initialTime);
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
+            intervalRef.current = null;
         }
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
         }
     }, [initialTime]);
 
@@ -46,17 +49,33 @@ export const useGameTimer = (initialTime = 5) => {
 
     useEffect(() => {
         if (isActive && !isPaused && timeLeft > 0) {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
             intervalRef.current = setInterval(() => {
-                setTimeLeft(prev => prev - 1);
+                setTimeLeft(prev => {
+                    if (prev <= 1) {
+                        clearInterval(intervalRef.current);
+                        intervalRef.current = null;
+                        return 0;
+                    }
+                    return prev - 1;
+                });
             }, 1000);
+        } else if (!isActive || isPaused) {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
         }
 
         return () => {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
+                intervalRef.current = null;
             }
         };
-    }, [isActive, isPaused, timeLeft]);
+    }, [isActive, isPaused]);
 
     useEffect(() => {
         if (timeLeft === 0 && isActive) {

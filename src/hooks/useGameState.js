@@ -85,13 +85,13 @@ export const useGameState = () => {
   }, [board, isXNext, gameOver, timer, updateScore, animations, accessibility]);
 
   const makeAutoMove = useCallback(() => {
-    if (gameOver || !timer.isActive) return;
+    if (gameOver) return;
     
     const randomIndex = makeRandomMove(board);
     if (randomIndex !== null) {
       makeMove(randomIndex);
     }
-  }, [board, gameOver, timer.isActive, makeMove]);
+  }, [board, gameOver, makeMove]);
 
   const resetGame = useCallback(() => {
     setBoard(Array(9).fill(null));
@@ -100,6 +100,7 @@ export const useGameState = () => {
     setWinner(null);
     setIsDraw(false);
     timer.resetTimer();
+    timer.startTimer();
     accessibility.announceToScreenReader('Novo jogo iniciado');
     accessibility.playSound('click');
   }, [timer, accessibility]);
@@ -118,13 +119,14 @@ export const useGameState = () => {
   }, [resetGame, resetScore]);
 
   useEffect(() => {
-    if (timer.timeLeft === 0 && timer.isActive) {
+    if (timer.timeLeft === 0 && timer.isActive && !gameOver) {
       makeAutoMove();
     }
-  }, [timer.timeLeft, timer.isActive, makeAutoMove]);
+  }, [timer.timeLeft, timer.isActive, gameOver, makeAutoMove]);
 
   useEffect(() => {
-    if (!gameOver && board.some(square => square !== null)) {
+    const hasMoves = board.some(square => square !== null);
+    if (hasMoves && !gameOver && !timer.isActive) {
       timer.startTimer();
     }
   }, [board, gameOver, timer]);
