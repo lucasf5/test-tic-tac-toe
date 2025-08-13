@@ -1,0 +1,42 @@
+.game-layout {
+    flex: 1;
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.game-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .game-layout {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .game-sidebar {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-layout {
+        padding: 15px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-layout {
+        padding: 10px;
+        gap: 10px;
+    }
+}

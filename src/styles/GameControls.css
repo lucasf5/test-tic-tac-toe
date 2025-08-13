@@ -1,0 +1,54 @@
+.game-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.new-game-button,
+.new-match-button {
+    background: #00b894;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 176, 148, 0.3);
+}
+
+.new-game-button:hover:not(:disabled),
+.new-match-button:hover {
+    background: #00a085;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 176, 148, 0.4);
+}
+
+.new-game-button:disabled {
+    background: #b2bec3;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .game-controls {
+        gap: 10px;
+    }
+
+    .new-game-button,
+    .new-match-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-controls {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+}

@@ -1,0 +1,97 @@
+.accessibility-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    background: var(--board-color);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    max-width: 150px;
+}
+
+.accessibility-controls:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.accessibility-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.accessibility-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.accessibility-btn.active {
+    background: var(--x-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
+}
+
+.accessibility-btn .icon {
+    font-size: 1rem;
+}
+
+.accessibility-btn .label {
+    font-size: 0.8rem;
+}
+
+.accessibility-info {
+    margin-top: 8px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.info-text {
+    font-size: 0.7rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .accessibility-controls {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px;
+        max-width: 130px;
+    }
+
+    .accessibility-btn {
+        padding: 6px 8px;
+        min-width: 100px;
+    }
+
+    .accessibility-btn .label {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-controls {
+        position: static;
+        margin: 10px auto;
+        max-width: 300px;
+        bottom: auto;
+        right: auto;
+    }
+}

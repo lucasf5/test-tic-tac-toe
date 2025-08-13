@@ -1,0 +1,159 @@
+.square {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--text-color);
+    background: var(--board-color);
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.square:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.square:focus {
+    outline: 3px solid var(--x-color);
+    outline-offset: 2px;
+    transform: scale(1.02);
+}
+
+.square:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.square.winning {
+    background: linear-gradient(45deg, var(--x-color), var(--o-color));
+    animation: winning-pulse 1s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.square-appear {
+    animation: square-appear 0.4s ease-out;
+}
+
+.square-winner {
+    animation: square-winner 0.6s ease-in-out;
+}
+
+.symbol {
+    font-size: 3rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.symbol.x {
+    color: var(--x-color);
+    animation: symbol-appear 0.3s ease-out;
+}
+
+.symbol.o {
+    color: var(--o-color);
+    animation: symbol-appear 0.3s ease-out;
+}
+
+@keyframes winning-pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        transform: scale(1);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes symbol-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(180deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes square-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-10deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes square-winner {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+
+    75% {
+        transform: scale(1.15) rotate(3deg);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 768px) {
+    .square {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .symbol {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .square {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .symbol {
+        font-size: 2rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .square,
+    .symbol {
+        animation: none !important;
+        transition: none !important;
+    }
+}
